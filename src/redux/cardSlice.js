@@ -44,14 +44,6 @@ const cardSlice = createSlice({
     removeCard: (state, action) => {
       return state.filter((card) => card.cardNumber !== action.payload); //filter out card you want to remove
     },
-    // editCard: (state, action) => {
-    //   return {
-    //     ...state,
-    //     cards: state.cards.map((card) =>
-    //       card.id === action.payload.id ? { ...card, ...action.payload } : card
-    //     ),
-    //   };
-    // },
     editCard: (state, action) => {
       console.log("State before edit:", state);
       console.log("Action payload:", action.payload);
@@ -85,20 +77,6 @@ const cardSlice = createSlice({
         ),
       };
     },
-    // toggleCardActivation: (state, action) => {
-    //   const cardId = action.payload.id;
-    //   const cardToToggle = state.cards.find((c) => c.id === cardId);
-    //   if (!cardToToggle) return state; // No card found, return the current state
-    //   if (cardToToggle.isActive) return state; // If already inactive, return current state
-
-    //   console.log("Toggling card:", cardId);
-    //   return {
-    //     ...state,
-    //     cards: state.cards.map((c) =>
-    //       c.id === cardId ? { ...c, isActive: !c.isActive } : c
-    //     ),
-    //   };
-    // },
   },
 });
 
