@@ -6,7 +6,7 @@ const cardSlice = createSlice({
     cards: [
       {
         id: 5,
-        cardIssuer: "Bank A",
+        cardIssuer: "Silver Oak Bank",
         cardNumber: "1234567891011121",
         cardHolder: "JON",
         expireMonth: "12",
@@ -15,8 +15,8 @@ const cardSlice = createSlice({
         isActive: false,
       },
       {
-        id: 0,
-        cardIssuer: "Bank A",
+        id: 2,
+        cardIssuer: "Horizon Financial",
         cardNumber: "1234567891011121",
         cardHolder: "John Doe",
         expireMonth: "12",
@@ -26,7 +26,7 @@ const cardSlice = createSlice({
       },
       {
         id: 1,
-        cardIssuer: "Bank B",
+        cardIssuer: "Horizon Financial",
         cardNumber: "9876543210987654",
         cardHolder: "Jane Smith",
         expireMonth: "11",
@@ -42,7 +42,11 @@ const cardSlice = createSlice({
       state.cards.push(action.payload); // add new card to state array of cards
     },
     removeCard: (state, action) => {
-      return state.filter((card) => card.cardNumber !== action.payload); //filter out card you want to remove
+      console.log("STATE", state);
+      return {
+        ...state,
+        cards: state.cards.filter((card) => card.id !== action.payload.id), //filter out card you want to remove
+      };
     },
     editCard: (state, action) => {
       console.log("State before edit:", state);

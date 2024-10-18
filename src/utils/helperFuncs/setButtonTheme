@@ -1,0 +1,17 @@
+import styles from "../../components/globalStyles.module.css";
+
+const setButtonTheme = (selectedTheme) => {
+  console.log("FUCKENSEL", selectedTheme);
+  if (selectedTheme === "red") {
+    return styles.buttonRed;
+  }
+  if (selectedTheme === "dark") {
+    return styles.buttonDark;
+  }
+  if (selectedTheme === "color-crazy") {
+    return styles.buttonCrazy;
+  }
+  return "Hey";
+};
+
+export default setButtonTheme;

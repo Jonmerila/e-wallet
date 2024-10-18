@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-
+import checkBankTheme from "../utils/helperFuncs/checkBankTheme";
+import styles from "./globalStyles.module.css";
+import bankchip from "../assets/bankchip.png";
 function Card({card}) {
 
-    
    
     const formatCardNumber = (number) => {
         if (!number) return '';
@@ -10,26 +11,31 @@ function Card({card}) {
         return cleanNumber.replace(/(\d{4})(?=\d)/g, "$1 "); // Format with spaces
     };
         
+    console.log("CARDTHEME", checkBankTheme("Horizon Financial"));
     
     return (
         <>
           {card.id ? (
             <Link to={`card/${card.id}`}>
-              <div className="card">
-                <h3>{card.cardHolder}</h3>
-                <h3>{card.cardIssuer}</h3>
-                <p>{formatCardNumber(card.cardNumber)}</p>
-                <p>Expire date: {card.expireMonth} / {card.expireYear}</p>
-                <p>CCV: {card.ccv}</p>
-              </div>
+                <div className={styles[checkBankTheme(card.cardIssuer)]}>
+                    <div className={styles.titles}>
+                        <h3 className={styles.cardholderName}>{card.cardHolder}</h3>
+                        <h3 className={styles.cardIssuer}>{card.cardIssuer}</h3>
+                    </div>
+                    <img src={bankchip} alt="Bank Chip" className={styles.chip} />
+                    <p className={styles.cardDigits}>{formatCardNumber(card.cardNumber)}</p>
+                    <p className={styles.expiration}>Expire date: {card.expireMonth} / {card.expireYear}</p>
+                    
+                </div>
             </Link>
           ) : (
-            <div className="card">
-              <h3>{card.cardHolder}</h3>
-              <h3>{card.cardIssuer}</h3>
-              {formatCardNumber(card.cardNumber)}
-              <p>Expire date: {card.expireMonth} / {card.expireYear}</p>
-              <p>CCV: {card.ccv}</p>
+            <div className={styles[checkBankTheme(card.cardIssuer)]}>
+                <img src={bankchip} alt="Bank Chip" className={styles.chip} />
+                <h3 className={styles.cardholderName}>{card.cardHolder}</h3>
+                <h3 className={styles.cardIssuer}>{card.cardIssuer}</h3>
+                <p className={styles.cardDigits}>{formatCardNumber(card.cardNumber)}</p>
+                <p className={styles.expiration}>Expire date: {card.expireMonth} / {card.expireYear}</p>
+                
             </div>
           )}
         </>

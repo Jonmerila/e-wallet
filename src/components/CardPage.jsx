@@ -1,7 +1,7 @@
 import CardConfig from "./CardConfig";
 import Card from "./Card";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { removeCard, editCard, toggleCardActivation } from "../redux/cardSlice";
 import validateInput from "../utils/helperFuncs/validateInput";
@@ -16,6 +16,7 @@ function CardPage() {
 
     const dispatch = useDispatch();
     const {id} = useParams();
+    const navigate = useNavigate();
     const cards = useSelector((state) => state.cards.cards);
     let uniCard = cards.find((c) => c.id == id);
 
@@ -54,7 +55,15 @@ function CardPage() {
         
     }
 
-   
+
+    const deleteUniCard = () => {
+        
+        const confirmed = window.confirm("Are you sure you want to delete this card?");
+        if (confirmed) {
+        dispatch(removeCard(uniCard)); 
+        navigate("/"); 
+        }
+    }
 
     const editMode = () => {
         console.log("UNICARD", uniCard);
@@ -66,32 +75,13 @@ function CardPage() {
     };
 
     const handleToggle = () => {
-        // console.log("Dispatching toggle for card ID:", uniCard.id);
+        if(uniCard.isActive == false){
+            const currentActive = cards.find((c) => c.isActive == true);
+            console.log("Current active card", currentActive);
+            dispatch(toggleCardActivation({ id: currentActive.id}))
+        }
         dispatch(toggleCardActivation({ id: uniCard.id }));
     };
-    // useEffect(() => {
-    //     const uniCard = cards.find((c) => c.id == id);
-    //     console.log("IDCARD", uniCard);
-
-    //     const { id: omitId, ...cardWithoutId } = uniCard || {};
-    //     setCard(cardWithoutId);
-        
-    // }, [cards, id]);
-
-    // useEffect(() => {
-    //     if (uniCard) {
-    //         setFormData({
-    //             cardIssuer: uniCard.cardIssuer,
-    //             cardNumber: uniCard.cardNumber,
-    //             cardHolder: uniCard.cardHolder,
-    //             expireMonth: uniCard.expireMonth,
-    //             expireYear: uniCard.expireYear,
-    //             ccv: uniCard.ccv,
-    //             isActive: uniCard.isActive,
-    //         });
-    //     }
-        
-    // }, [cards, id]);
 
     useEffect(() => {
         console.log("UNI", uniCard);
@@ -208,6 +198,7 @@ function CardPage() {
     }
 
     {!edit && uniCard?.isActive == false && <button onClick={() => {editMode()}}>Edit</button>}
+    {uniCard?.isActive == false && <button onClick={deleteUniCard}>Remove Card</button>}
         </>
      );
 }

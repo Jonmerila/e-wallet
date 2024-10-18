@@ -1,0 +1,223 @@
+body.red-theme {
+  background-color: rgba(204, 0, 0, 1);
+  color: white;
+}
+
+body.dark-theme {
+  background-color: rgba(29, 0, 0, 1);
+  color: white;
+}
+
+body.color-crazy-theme {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 150, 1),
+    rgba(0, 204, 255, 1)
+  );
+  color: black;
+}
+
+.cardDigits {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.chip {
+  height: 40px;
+  width: 40px;
+}
+
+.bank-Hori {
+  background: linear-gradient(
+    0deg,
+    rgba(195, 116, 34, 1) 0%,
+    rgba(253, 245, 45, 1) 100%
+  );
+  width: 400px;
+  height: 240px;
+  border-radius: 8px;
+  color: black;
+}
+
+.bank-Silver {
+  background: linear-gradient(
+    0deg,
+    rgba(69, 69, 69, 1) 0%,
+    rgba(252, 252, 252, 1) 100%
+  );
+  width: 400px;
+  height: 240px;
+  border-radius: 8px;
+  color: black;
+}
+
+.bank-Pinnacle {
+  background: linear-gradient(
+    0deg,
+    rgba(87, 151, 235, 1) 0%,
+    rgba(0, 42, 184, 1) 100%
+  );
+  width: 400px;
+  height: 240px;
+  border-radius: 8px;
+  color: black;
+}
+
+.container {
+  padding: 12px;
+  margin: 20px;
+  border-radius: 12px;
+}
+
+.container.red {
+  color: white;
+  background: linear-gradient(
+    0deg,
+    rgba(204, 0, 0, 1) 0%,
+    rgba(82, 0, 0, 1) 100%
+  );
+}
+
+.container.dark {
+  color: white;
+  background: linear-gradient(
+    0deg,
+    rgba(80, 80, 80, 1) 0%,
+    rgba(30, 30, 42, 1) 100%
+  );
+}
+
+/* .container-colorCrazy {
+} */
+
+.buttonRed {
+  background: #db0000;
+  color: white;
+  border-radius: 6px;
+}
+
+.buttonDark {
+  color: white;
+  background: black;
+  border-radius: 6px;
+}
+
+.buttonCrazy {
+  color: black;
+  background: linear-gradient(45deg, rgba(255, 255, 0, 1), rgba(0, 255, 0, 1));
+
+  border-radius: 6px;
+}
+
+/* FORM INPUT */
+
+.formContainer {
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+}
+
+.formContainer.red {
+  background-color: rgba(204, 0, 0, 0.1);
+  color: rgba(204, 0, 0, 1);
+}
+
+.formContainer.dark {
+  background-color: rgba(29, 0, 0, 0.1);
+  color: rgba(29, 0, 0, 1);
+}
+
+.formContainer.colorCrazy {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 150, 0.1),
+    rgba(0, 204, 255, 0.1)
+  );
+  color: black;
+}
+
+.label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.inputField {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  width: 100%;
+  select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: calc(50% - 10px);
+    box-sizing: border-box;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+/* CARD STYLING */
+
+.bank-Hori,
+.bank-Silver,
+.bank-Pinnacle {
+  width: 400px;
+  height: 240px;
+  border-radius: 8px;
+  color: white;
+  padding: 20px;
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.titles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardDigits {
+  align-self: center;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.cardholder-name {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.cardIssuer {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.expiration {
+  font-size: 0.8rem;
+  margin: 10px 0 0;
+}
+
+.ccv {
+  font-size: 0.8rem;
+  margin: 5px 0;
+}
+
+.chip {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  width: 50px;
+  height: auto;
+}

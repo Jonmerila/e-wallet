@@ -1,0 +1,9 @@
+const currentTheme = () => {
+  let theme = localStorage.getItem("theme");
+  if (theme) {
+    return theme;
+  }
+  return "dark";
+};
+
+export default currentTheme;

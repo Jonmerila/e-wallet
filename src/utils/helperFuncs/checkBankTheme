@@ -1,0 +1,15 @@
+const checkBankTheme = (bank) => {
+  console.log("BANK", bank);
+  if (bank == "Pinnacle Bank") {
+    return "bank-Pinnacle";
+  }
+  if (bank == "Horizon Financial") {
+    return "bank-Hori";
+  }
+  if (bank == "Silver Oak Bank") {
+    return "bank-Silver";
+  }
+  return "hey";
+};
+
+export default checkBankTheme;

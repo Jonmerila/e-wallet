@@ -1,9 +1,10 @@
 import Navigation from './components/Navigation'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {Provider} from "react-redux";
 import HomePage from './components/HomePage';
 import CardConfig from './components/CardConfig';
 import CardPage from './components/CardPage';
-import {Provider} from "react-redux";
+import SiteSettings from './components/SiteSettings';
 import store from './redux/store';
 import './App.css'
 
@@ -20,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage/>}></Route>
           <Route path="/addcard" element={<CardConfig/>}></Route>
           <Route path="/card/:id" element={<CardPage/>}></Route>
-          {/* <Route path="/" element={}></Route> */}
+          <Route path="/settings" element={<SiteSettings/>}></Route>
         </Routes>
 
       </Router>

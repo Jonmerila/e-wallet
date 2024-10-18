@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+import { useEffect } from "react";
+import currentTheme from "../utils/helperFuncs/getCurrentTheme";
+import setButtonTheme from "../utils/helperFuncs/setButtonTheme";
 import Card from "./Card";
 import { toggleCardActivation } from "../redux/cardSlice";
+import styles from "./globalStyles.module.css";
 function HomePage() {
 
     const dispatch = useDispatch();
+    const theme = currentTheme();
+    console.log("THEME", theme);
     const cards = useSelector((state) => state.cards.cards);
+    console.log("HMCARDS", cards);
     let activeCard = cards.find(card => card.isActive);
+    console.log("ACTIVE: ", activeCard);
     if(!activeCard){
         activeCard = cards[0];
         dispatch(toggleCardActivation({id: activeCard.id}));
@@ -15,21 +22,26 @@ function HomePage() {
     }
     const inactiveCards = cards.filter(card => !card.isActive);
 
-
+    useEffect(() => {
+        document.body.classList.remove('red-theme', 'dark-theme', 'color-crazy-theme');
+        document.body.classList.add(`${theme}-theme`);
+    }, [theme]);
     return ( 
     <>
         <h1>Home Page</h1>
-
-        <div className="activeCard">
-            <p>Active Card</p>
-            <Link to={`card/${activeCard.id}`}><Card card={activeCard}/></Link>
+        <div className={`container ${styles[theme]}`}>
+            <div>
+                <p>Active Card</p>
+                <Card card={activeCard}/>
+            </div>
+            <div className="cardList">
+                <p>Inactive Cards</p>
+                {inactiveCards.map((card, i) => <Card key={i} card={card}/>)}
+                
+            </div>
+            <Link to="/addcard"><button className={setButtonTheme(theme)}>Add new card</button></Link>
         </div>
-        <div className="cardList">
-            <p>Inactive Cards</p>
-            {inactiveCards.map((card, i) => <Link to={`card/${card.id}`} ><Card  key={i} card={card}/></Link>)}
-             
-        </div>
-        <Link to="/addcard"><button>Add new card</button></Link>
+        
     </> );
 }
 

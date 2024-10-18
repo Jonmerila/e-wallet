@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../redux/cardSlice";
-import validateInput from "../utils/helperFuncs/validateInput";
+import styles from "./globalStyles.module.css";
 import Card from "./Card";
+import validateInput from "../utils/helperFuncs/validateInput";
+import setButtonTheme from "../utils/helperFuncs/setButtonTheme";
+import currentTheme from "../utils/helperFuncs/getCurrentTheme";
 
 
 function CardConfig(card) {
@@ -10,6 +13,7 @@ function CardConfig(card) {
     const dispatch = useDispatch();
     const cards = useSelector((state) => state.cards.cards);
     let [errors, setErrors] = useState({});
+    const theme = currentTheme();
     //Check if card is edited or created
     if(!card){}
     
@@ -79,101 +83,98 @@ function CardConfig(card) {
         setErrors({});
     }
 
+    useEffect(() => {
+        document.body.classList.remove('red-theme', 'dark-theme', 'color-crazy-theme');
+        document.body.classList.add(`${theme}-theme`);
+    }, [theme]);
+
     
 
-    return ( 
+    return (
         <>
-                <h2>Card Config</h2>
-                <Card card={formData}/>
-        <form onSubmit={handleSubmit}>
-        <label htmlFor="cardIssuer">Card Issuer:</label>
-        <select
-            name="cardIssuer"
-            value={formData.cardIssuer}
-            onChange={handleChange}
-            required
-        >
-            <option value="">Select a bank</option>
-            <option value="Bank A">Bank A</option>
-            <option value="Bank B">Bank B</option>
-            <option value="Bank C">Bank C</option>
-        </select>
-        {errors.cardIssuer && <br /> && <span className="error">{errors.cardIssuer}</span>}
-        <br />
-
-        <label htmlFor="cardNumber">Card Number:</label>
-        <input
-            placeholder="XXXX XXXX XXXX XXXX"
-            type="number"
-            name="cardNumber"
-            value={formData.cardNumber}
-            onChange={handleChange}
-            required
-            // maxLength={16}
-        />
-       
-         {errors.cardNumber && <br /> && <span className="error">{errors.cardNumber}</span>}
-         <br />
-
-        <label htmlFor="cardHolder">Cardholder:</label>
-        <input
-            type="text"
-            placeholder="Name"
-            name="cardHolder"
-            value={formData.cardHolder}
-            onChange={handleChange}
-            required
-        />
-       
-        {errors.cardHolder && <br /> && <span className="error">{errors.cardHolder}</span>}
-        <br />
-        <label htmlFor="expireMonth">Expire Month:</label>
-        <input
-            type="number"
-            name="expireMonth"
-            placeholder="MM"
-            value={formData.expireMonth}
-            onChange={handleChange}
-            required
-        />
-        
-        {errors.expireMonth && <br /> && <span className="error">{errors.expireMonth}</span>}
-        <br />
-
-        <label htmlFor="expireYear">Expire Year:</label>
-        <input
-            type="number"
-            name="expireYear"
-            placeholder="YY"
-            value={formData.expireYear}
-            onChange={handleChange}
-            required
-        />
-         
-        {errors.expireYear && <br /> && <span className="error">{errors.expireYear}</span>}
-        <br />
-
-        <label htmlFor="ccv">CCV:</label>
-        <input
-            type="text"
-            name="ccv"
-            placeholder="XXX"
-            value={formData.ccv}
-            onChange={handleChange}
-            required
-        />
-         
-        {errors.ccv && <br /> && <span className="error">{errors.ccv}</span>}
-        <br />
-
-       
-
-        <button type="submit">Add Card</button>
-        </form>
-    
-
+            <h2>Card Config</h2>
+            <Card card={formData} />
+            <form className={`${styles.formContainer} ${theme}`} onSubmit={handleSubmit}>
+                <label className={styles.label} htmlFor="cardIssuer">Card Issuer:</label>
+                <select
+                    name="cardIssuer"
+                    value={formData.cardIssuer}
+                    onChange={handleChange}
+                    required
+                    className={styles.inputField}
+                >
+                    <option value="">Select a bank</option>
+                    <option value="Pinnacle Bank">Pinnacle Bank</option>
+                    <option value="Horizon Financial">Horizon Financial</option>
+                    <option value="Silver Oak Bank">Silver Oak Bank</option>
+                </select>
+                {errors.cardIssuer && <span className={styles.error}>{errors.cardIssuer}</span>}
+                
+                <label className={styles.label} htmlFor="cardNumber">Card Number:</label>
+                <input
+                    placeholder="XXXX XXXX XXXX XXXX"
+                    type="number"
+                    name="cardNumber"
+                    value={formData.cardNumber}
+                    onChange={handleChange}
+                    maxLength={16}
+                    required
+                    className={styles.inputField}
+                />
+                {errors.cardNumber && <span className={styles.error}>{errors.cardNumber}</span>}
+                
+                <label className={styles.label} htmlFor="cardHolder">Cardholder:</label>
+                <input
+                    type="text"
+                    placeholder="Name"
+                    name="cardHolder"
+                    value={formData.cardHolder}
+                    onChange={handleChange}
+                    required
+                    className={styles.inputField}
+                />
+                {errors.cardHolder && <span className={styles.error}>{errors.cardHolder}</span>}
+                
+                <label className={styles.label} htmlFor="expireMonth">Expire Month:</label>
+                <input
+                    type="number"
+                    name="expireMonth"
+                    placeholder="MM"
+                    value={formData.expireMonth}
+                    onChange={handleChange}
+                    required
+                    className={styles.inputField}
+                />
+                {errors.expireMonth && <span className={styles.error}>{errors.expireMonth}</span>}
+                
+                <label className={styles.label} htmlFor="expireYear">Expire Year:</label>
+                <input
+                    type="number"
+                    name="expireYear"
+                    placeholder="YY"
+                    value={formData.expireYear}
+                    onChange={handleChange}
+                    required
+                    className={styles.inputField}
+                />
+                {errors.expireYear && <span className={styles.error}>{errors.expireYear}</span>}
+                
+                <label className={styles.label} htmlFor="ccv">CCV:</label>
+                <input
+                    type="text"
+                    name="ccv"
+                    placeholder="XXX"
+                    value={formData.ccv}
+                    onChange={handleChange}
+                    required
+                    className={styles.inputField}
+                />
+                {errors.ccv && <span className={styles.error}>{errors.ccv}</span>}
+                
+                <button type="submit" className={setButtonTheme(theme)}>Add Card</button>
+            </form>
         </>
-     );
+    );
 }
 
 export default CardConfig;
