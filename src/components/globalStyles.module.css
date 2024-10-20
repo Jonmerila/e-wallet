@@ -4,7 +4,7 @@ body.red-theme {
 }
 
 body.dark-theme {
-  background-color: rgba(29, 0, 0, 1);
+  background: #01041d;
   color: white;
 }
 
@@ -15,6 +15,13 @@ body.color-crazy-theme {
     rgba(0, 204, 255, 1)
   );
   color: black;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 40px;
 }
 
 .cardDigits {
@@ -83,8 +90,17 @@ body.color-crazy-theme {
   color: white;
   background: linear-gradient(
     0deg,
-    rgba(80, 80, 80, 1) 0%,
+    rgb(80, 80, 80) 0%,
     rgba(30, 30, 42, 1) 100%
+  );
+}
+
+.container.color-crazy {
+  color: black;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 150, 1) 0%,
+    rgba(0, 204, 255, 1) 100%
   );
 }
 
@@ -164,7 +180,6 @@ body.color-crazy-theme {
 }
 
 /* CARD STYLING */
-
 .bank-Hori,
 .bank-Silver,
 .bank-Pinnacle {
@@ -178,7 +193,7 @@ body.color-crazy-theme {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between; /* Space out titles and bottom content */
 }
 
 .titles {
@@ -189,11 +204,11 @@ body.color-crazy-theme {
 
 .cardDigits {
   align-self: center;
-  font-size: 1.6rem;
+  font-size: 22px;
   letter-spacing: 2px;
   margin: 0;
+  text-align: center;
 }
-
 .cardholder-name {
   margin: 10px 0;
   font-size: 1.2rem;
@@ -207,6 +222,7 @@ body.color-crazy-theme {
 .expiration {
   font-size: 0.8rem;
   margin: 10px 0 0;
+  align-self: flex-end;
 }
 
 .ccv {
@@ -216,8 +232,76 @@ body.color-crazy-theme {
 
 .chip {
   position: absolute;
-  top: 100px;
-  left: 20px;
+  top: 130px;
+  left: 30px;
   width: 50px;
   height: auto;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 24px;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.red-theme nav {
+  background-color: rgba(204, 0, 0, 1);
+}
+
+.red-theme nav a {
+  color: white;
+}
+
+.red-theme nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-theme nav {
+  background-color: rgba(80, 80, 80, 1);
+}
+
+.dark-theme nav a {
+  color: white;
+}
+
+.dark-theme nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.color-crazy-theme nav {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 150, 1) 0%,
+    rgba(255, 165, 0, 1) 50%,
+    rgba(0, 255, 255, 1) 100%
+  );
+}
+
+.color-crazy-theme nav a {
+  color: black;
+}
+
+.color-crazy-theme nav a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+  }
+  nav a {
+    margin: 5px 0;
+  }
 }

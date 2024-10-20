@@ -1,5 +1,4 @@
 const checkBankTheme = (bank) => {
-  console.log("BANK", bank);
   if (bank == "Pinnacle Bank") {
     return "bank-Pinnacle";
   }

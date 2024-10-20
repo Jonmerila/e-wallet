@@ -11,7 +11,7 @@ function Card({card}) {
         return cleanNumber.replace(/(\d{4})(?=\d)/g, "$1 "); // Format with spaces
     };
         
-    console.log("CARDTHEME", checkBankTheme("Horizon Financial"));
+   
     
     return (
         <>
@@ -24,8 +24,7 @@ function Card({card}) {
                     </div>
                     <img src={bankchip} alt="Bank Chip" className={styles.chip} />
                     <p className={styles.cardDigits}>{formatCardNumber(card.cardNumber)}</p>
-                    <p className={styles.expiration}>Expire date: {card.expireMonth} / {card.expireYear}</p>
-                    
+                    <p className={styles.expiration}>Expire date: {card.expireMonth} / {card.expireYear}</p>    
                 </div>
             </Link>
           ) : (
@@ -34,8 +33,7 @@ function Card({card}) {
                 <h3 className={styles.cardholderName}>{card.cardHolder}</h3>
                 <h3 className={styles.cardIssuer}>{card.cardIssuer}</h3>
                 <p className={styles.cardDigits}>{formatCardNumber(card.cardNumber)}</p>
-                <p className={styles.expiration}>Expire date: {card.expireMonth} / {card.expireYear}</p>
-                
+                <p className={styles.expiration}>Exp. date: {card.expireMonth} / {card.expireYear}</p>        
             </div>
           )}
         </>

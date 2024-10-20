@@ -9,12 +9,16 @@ import styles from "./globalStyles.module.css";
 function HomePage() {
 
     const dispatch = useDispatch();
-    const theme = currentTheme();
-    console.log("THEME", theme);
+    let theme = useSelector((state) => state.theme.theme);
+    if(theme !== localStorage.getItem("theme")){
+        theme = localStorage.getItem("theme");
+    }
+    console.log("selectorTHEME", theme);
     const cards = useSelector((state) => state.cards.cards);
-    console.log("HMCARDS", cards);
+   
     let activeCard = cards.find(card => card.isActive);
-    console.log("ACTIVE: ", activeCard);
+   
+
     if(!activeCard){
         activeCard = cards[0];
         dispatch(toggleCardActivation({id: activeCard.id}));
@@ -31,11 +35,11 @@ function HomePage() {
         <h1>Home Page</h1>
         <div className={`container ${styles[theme]}`}>
             <div>
-                <p>Active Card</p>
+                <h3>Active Card</h3>
                 <Card card={activeCard}/>
             </div>
-            <div className="cardList">
-                <p>Inactive Cards</p>
+            <div className={styles.cardList}>
+                <h3>Inactive Cards</h3>
                 {inactiveCards.map((card, i) => <Card key={i} card={card}/>)}
                 
             </div>

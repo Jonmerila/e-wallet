@@ -11,6 +11,7 @@ function SiteSettings() {
     const cards = useSelector(state => state.cards.cards);
     const dispatch = useDispatch();
     const activeTheme = useSelector((state) => state.theme);
+    const [formSelectedTheme, setFormSelectedTheme] = useState(currentTheme());
     let [selectedTheme, setselectedTheme] = useState(currentTheme());
     console.log("selTHeme", selectedTheme);
 
@@ -18,6 +19,7 @@ function SiteSettings() {
     const handleTheme = (e) => {
         e.preventDefault();
         console.log("Handled theme", selectedTheme);
+        setselectedTheme(formSelectedTheme);
         dispatch(setTheme(selectedTheme))
         localStorage.setItem("theme", selectedTheme);
     }
@@ -48,8 +50,8 @@ function SiteSettings() {
                 <select 
                     name="theme" 
                     id="themeSelect" 
-                    onChange={(e) => setselectedTheme(e.target.value)} 
-                    value={selectedTheme}>
+                    onChange={(e) => setFormSelectedTheme(e.target.value)}
+                    value={formSelectedTheme}>
                     <option value="red">Red</option>
                     <option value="dark">Dark</option>
                     <option value="color-crazy">Color-crazy</option>
@@ -57,6 +59,7 @@ function SiteSettings() {
                 <button
                     type="submit"
                     className={setButtonTheme(selectedTheme)}
+                    // onClick={}
                     >
                     Set Theme
                 </button>
