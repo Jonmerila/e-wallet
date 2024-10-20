@@ -10,7 +10,7 @@ function SiteSettings() {
     
     const cards = useSelector(state => state.cards.cards);
     const dispatch = useDispatch();
-    const activeTheme = useSelector((state) => state.theme);
+
     const [formSelectedTheme, setFormSelectedTheme] = useState(currentTheme());
     let [selectedTheme, setselectedTheme] = useState(currentTheme());
     console.log("selTHeme", selectedTheme);
@@ -20,10 +20,11 @@ function SiteSettings() {
         e.preventDefault();
         console.log("Handled theme", selectedTheme);
         setselectedTheme(formSelectedTheme);
-        dispatch(setTheme(selectedTheme))
-        localStorage.setItem("theme", selectedTheme);
+        dispatch(setTheme(formSelectedTheme))
+        localStorage.setItem("theme", formSelectedTheme);
     }
 
+    
     const removeInactiveCards = () => {
         let confirm = window.confirm("Are you sure you want to delete ALL inactive cards?");
         if(confirm){
@@ -36,6 +37,7 @@ function SiteSettings() {
     
 
     useEffect(() => {
+        localStorage.setItem("theme", selectedTheme);
         document.body.classList.remove('red-theme', 'dark-theme', 'color-crazy-theme');
         document.body.classList.add(`${selectedTheme}-theme`);
     }, [selectedTheme]);
@@ -44,12 +46,14 @@ function SiteSettings() {
     return ( 
         <>
             <h2>Settings</h2>
-            <h3>Theme Selector</h3>
+            
             <div className={`${styles.container} ${styles[selectedTheme]}`}>
+            <h3>Theme Selector</h3>
                 <form action="" onSubmit={handleTheme}>
                 <select 
                     name="theme" 
                     id="themeSelect" 
+                    className={styles.themeSel}
                     onChange={(e) => setFormSelectedTheme(e.target.value)}
                     value={formSelectedTheme}>
                     <option value="red">Red</option>

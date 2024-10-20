@@ -34,7 +34,7 @@ function HomePage() {
     <>
         <h1>Home Page</h1>
         <div className={`container ${styles[theme]}`}>
-            <div>
+            <div className={styles.activeContainer}>
                 <h3>Active Card</h3>
                 <Card card={activeCard}/>
             </div>

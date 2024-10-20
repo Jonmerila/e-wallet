@@ -8,7 +8,10 @@ const checkBankTheme = (bank) => {
   if (bank == "Silver Oak Bank") {
     return "bank-Silver";
   }
-  return "hey";
+  if (bank == "Bank Name") {
+    return "bank-empty";
+  }
+  return "null-bank";
 };
 
 export default checkBankTheme;

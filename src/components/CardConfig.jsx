@@ -8,15 +8,15 @@ import setButtonTheme from "../utils/helperFuncs/setButtonTheme";
 import currentTheme from "../utils/helperFuncs/getCurrentTheme";
 
 
-function CardConfig(card) {
+function CardConfig(editCard) {
 //    let hasErrors, errors;
     const dispatch = useDispatch();
     const cards = useSelector((state) => state.cards.cards);
     let [errors, setErrors] = useState({});
+    let [showCard, setShowCard] = useState(false);
     const theme = currentTheme();
     //Check if card is edited or created
-    if(!card){}
-    
+   
 
 
     let [formData, setFormData] = useState({
@@ -34,6 +34,7 @@ function CardConfig(card) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setShowCard(true);
         // if (name === "cardNumber") {
         //     const formattedValue = value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
         //     setFormData({ ...formData, [name]: formattedValue });
@@ -46,6 +47,7 @@ function CardConfig(card) {
     }
 
     const handleSubmit = (e) => {
+        setShowCard(false);
         e.preventDefault();
 
 
@@ -83,6 +85,11 @@ function CardConfig(card) {
         setErrors({});
     }
 
+
+    // if(editCard){
+    //     setFormData(editCard);
+    // }
+    
     useEffect(() => {
         document.body.classList.remove('red-theme', 'dark-theme', 'color-crazy-theme');
         document.body.classList.add(`${theme}-theme`);
@@ -93,7 +100,7 @@ function CardConfig(card) {
     return (
         <>
             <h2>Card Config</h2>
-            <Card card={formData} />
+           { showCard && <Card card={formData} />}
             <form className={`${styles.formContainer} ${theme}`} onSubmit={handleSubmit}>
                 <label className={styles.label} htmlFor="cardIssuer">Card Issuer:</label>
                 <select
@@ -103,7 +110,7 @@ function CardConfig(card) {
                     required
                     className={styles.inputField}
                 >
-                    <option value="">Select a bank</option>
+                    <option value="Bank Name">Select a bank</option>
                     <option value="Pinnacle Bank">Pinnacle Bank</option>
                     <option value="Horizon Financial">Horizon Financial</option>
                     <option value="Silver Oak Bank">Silver Oak Bank</option>

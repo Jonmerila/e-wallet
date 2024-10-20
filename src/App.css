@@ -47,7 +47,7 @@ body.red-theme {
 }
 
 body.dark-theme {
-  background-color: rgba(29, 0, 0, 1);
+  background: #01041d;
   color: white;
 }
 
