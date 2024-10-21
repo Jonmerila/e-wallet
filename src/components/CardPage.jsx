@@ -143,15 +143,14 @@ function CardPage() {
             
             <label className={styles.label} htmlFor="cardNumber">Card Number:</label>
             <input
-                type="text" // Change type to "text"
+                type="text"
                 placeholder="XXXX XXXX XXXX XXXX"
                 name="cardNumber"
                 value={formData.cardNumber}
                 onChange={(e) => {
                     const value = e.target.value;
-                    // Use regex to allow only digits and limit to 16 characters
                     if (/^\d{0,16}$/.test(value)) {
-                        handleChange(e); // Call your original change handler
+                        handleChange(e); 
                     }
                 }}
                 className={styles.inputField}
@@ -173,15 +172,14 @@ function CardPage() {
             
             <label className={styles.label} htmlFor="expireMonth">Expire Month(1-12):</label>
             <input
-                type="text" // Change to text
+                type="text"
                 name="expireMonth"
                 placeholder="MM"
                 value={formData.expireMonth}
                 onChange={(e) => {
                     const value = e.target.value;
-                    // Allow only 2-digit numbers
-                    if (/^\d{0,2}$/.test(value)) {
-                        handleChange(e);
+                    if (/^\d{0,2}$/.test(value) && (value === '' || (parseInt(value, 10) >= 1 && parseInt(value, 10) <= 12))) {
+                        handleChange(e); 
                     }
                 }}
                 required
@@ -189,7 +187,7 @@ function CardPage() {
             />
             {errors.expireMonth && <span className={styles.error}>{errors.expireMonth}</span>}
             
-            <label className={styles.label} htmlFor="expireYear">Expire Year:</label>
+            <label className={styles.label} htmlFor="expireYear">Expire Year(atleast over 2024):</label>
             <input
                 type="text" // Change to text
                 name="expireYear"
@@ -197,9 +195,12 @@ function CardPage() {
                 value={formData.expireYear}
                 onChange={(e) => {
                     const value = e.target.value;
-                    // Allow only 2-digit numbers
                     if (/^\d{0,2}$/.test(value)) {
-                        handleChange(e);
+                        if (value === '' || (value.length === 2 && parseInt(value, 10) > 24)) {
+                            handleChange(e); 
+                        } else if (value.length < 2) {
+                            handleChange(e);
+                        }
                     }
                 }}
                 required
@@ -209,13 +210,12 @@ function CardPage() {
             
             <label className={styles.label} htmlFor="ccv">CCV:</label>
             <input
-                type="text" // Keep as text to control input length
+                type="text" 
                 name="ccv"
                 placeholder="XXX"
                 value={formData.ccv}
                 onChange={(e) => {
                     const value = e.target.value;
-                    // Allow only 3-digit numbers
                     if (/^\d{0,3}$/.test(value)) {
                         handleChange(e);
                     }

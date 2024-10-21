@@ -68,17 +68,22 @@ function CardConfig(editCard) {
             id: nextId,
         };
 
-
-        dispatch(addCard(newCard));
-        setFormData({
-            cardIssuer: "",
-            cardNumber: "",
-            cardHolder: "",
-            expireMonth: "",
-            expireYear: "",
-            ccv: "",
-            isActive: true,
-        });
+        if(cards.length <= 4){
+            dispatch(addCard(newCard));
+            setFormData({
+                cardIssuer: "",
+                cardNumber: "",
+                cardHolder: "",
+                expireMonth: "",
+                expireYear: "",
+                ccv: "",
+                isActive: true,
+            });
+        } else {
+            alert("Too many cards! Delete one to create a new.");
+            return;
+        }
+        
 
             
         console.log("FORMDATA", formData);
@@ -123,7 +128,12 @@ function CardConfig(editCard) {
                     type="number"
                     name="cardNumber"
                     value={formData.cardNumber}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d{0,16}$/.test(value)) {
+                            handleChange(e); 
+                        }
+                    }}
                     maxLength={16}
                     required
                     className={styles.inputField}
@@ -148,19 +158,33 @@ function CardConfig(editCard) {
                     name="expireMonth"
                     placeholder="MM"
                     value={formData.expireMonth}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d{0,2}$/.test(value) && (value === '' || (parseInt(value, 10) >= 1 && parseInt(value, 10) <= 12))) {
+                            handleChange(e); 
+                        }
+                    }}
                     required
                     className={styles.inputField}
                 />
                 {errors.expireMonth && <span className={styles.error}>{errors.expireMonth}</span>}
                 
-                <label className={styles.label} htmlFor="expireYear">Expire Year:</label>
+                <label className={styles.label} htmlFor="expireYear">Expire Year(atleast over 2024):</label>
                 <input
                     type="number"
                     name="expireYear"
                     placeholder="YY"
                     value={formData.expireYear}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d{0,2}$/.test(value)) {
+                            if (value === '' || (value.length === 2 && parseInt(value, 10) > 24)) {
+                                handleChange(e); 
+                            } else if (value.length < 2) {
+                                handleChange(e);
+                            }
+                        }
+                    }}
                     required
                     className={styles.inputField}
                 />
@@ -172,7 +196,12 @@ function CardConfig(editCard) {
                     name="ccv"
                     placeholder="XXX"
                     value={formData.ccv}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d{0,3}$/.test(value)) {
+                            handleChange(e);
+                        }
+                    }}
                     required
                     className={styles.inputField}
                 />

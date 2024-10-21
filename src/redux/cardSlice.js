@@ -34,12 +34,24 @@ const cardSlice = createSlice({
         ccv: "456",
         isActive: false, // Inactive card
       },
+      {
+        id: 8,
+        cardIssuer: "Horizon Financial",
+        cardNumber: "9221432109871654",
+        cardHolder: "Test Smith",
+        expireMonth: "10",
+        expireYear: "24",
+        ccv: "456",
+        isActive: false, // Inactive card
+      },
     ],
   },
 
   reducers: {
     addCard: (state, action) => {
       state.cards.push(action.payload); // add new card to state array of cards
+
+      console.log(state.cards.length);
     },
     removeCard: (state, action) => {
       console.log("STATE", state);
