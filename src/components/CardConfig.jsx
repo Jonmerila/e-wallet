@@ -9,13 +9,13 @@ import currentTheme from "../utils/helperFuncs/getCurrentTheme";
 
 
 function CardConfig(editCard) {
-//    let hasErrors, errors;
+
     const dispatch = useDispatch();
     const cards = useSelector((state) => state.cards.cards);
     let [errors, setErrors] = useState({});
     let [showCard, setShowCard] = useState(false);
     const theme = currentTheme();
-    //Check if card is edited or created
+
    
 
 
@@ -29,20 +29,11 @@ function CardConfig(editCard) {
         isActive: false,
     });
 
-    // let [cardDisplay, setCardDisplay] = useState({});
    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setShowCard(true);
-        // if (name === "cardNumber") {
-        //     const formattedValue = value.replace(/\D/g, "").replace(/(.{4})/g, "$1 ").trim();
-        //     setFormData({ ...formData, [name]: formattedValue });
-        // } else {
-        //     setFormData({ ...formData, [name]: value });
-        // }
-
-        // setCardDisplay({ ...formData, [name]: value});
         setFormData({ ...formData, [name]: value });
     }
 
@@ -68,7 +59,7 @@ function CardConfig(editCard) {
             id: nextId,
         };
 
-        if(cards.length <= 4){
+        if(cards.length <= 3){
             dispatch(addCard(newCard));
             setFormData({
                 cardIssuer: "",
@@ -90,10 +81,6 @@ function CardConfig(editCard) {
         setErrors({});
     }
 
-
-    // if(editCard){
-    //     setFormData(editCard);
-    // }
     
     useEffect(() => {
         document.body.classList.remove('red-theme', 'dark-theme', 'color-crazy-theme');
